@@ -8,6 +8,8 @@ const jwt = require('jsonwebtoken');
 const Admin = require('../models/Admin');
 const Student = require('../models/Student');
 
+const client = new OAuth2Client('517938499008-aoe60m0r5ffhdnrq9jp5ejgtu3irs89u.apps.googleusercontent.com');
+
 // Existing routes
 router.post('/admin', adminLogin);
 router.post('/student', studentLogin);
@@ -20,9 +22,6 @@ router.get('/students/:year', adminAuthMiddleware, students);
 router.post('/disableStudent', adminAuthMiddleware, disableStudent);
 router.get('/dueslogs/:year', adminAuthMiddleware, getDisablesStudentLogs);
 
-// Google OAuth route
-const client = new OAuth2Client('517938499008-aoe60m0r5ffhdnrq9jp5ejgtu3irs89u.apps.googleusercontent.com');
-
 router.post('/google', async (req, res) => {
   const { token } = req.body;
 
@@ -32,6 +31,7 @@ router.post('/google', async (req, res) => {
       audience: '517938499008-aoe60m0r5ffhdnrq9jp5ejgtu3irs89u.apps.googleusercontent.com',
     });
     const payload = ticket.getPayload();
+    
     const { sub, email, name, picture } = payload;
 
     // Check if user exists in Admin or Student collection
