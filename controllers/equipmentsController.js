@@ -156,7 +156,7 @@ const getEquipmentLog = async (req, res) => {
     const allEquipmentLogs = await EquipmentLog.find(baseQuery);
     res.json(allEquipmentLogs);
   } catch (error) {
-    res.status(500).json({ error: "An error occurred while fetching equipment's Logs" });
+    res.status(500).json({ error: error });
   }
 };
 
