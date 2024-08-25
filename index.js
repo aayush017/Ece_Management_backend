@@ -21,6 +21,9 @@ app.use("/api/transaction", require("./routes/transaction"));
 app.use("/api/equipment", require("./routes/equipment"));
 app.use("/api/transaction", require("./routes/transaction"));
 
+app.use("/admin/api/transaction", require("./routes/transaction"));
+app.use("/admin/api/equipment", require("./routes/equipment"));
+app.use("/admin/api/transaction", require("./routes/transaction"));
 // Serve the index.html file for any other requests
 app.get('*', (req, res) => {
   const indexPath = path.join(__dirname, './dist/index.html');
